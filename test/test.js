@@ -1,7 +1,6 @@
 var Monads = require('../lib/monads.js')
   , Identity = Monads.Identity
-  , Array = Monads.Array
-  , assert = require("assert")
+  , should = require("chai").should()
 
 describe('Monads Test', function() {
   describe('Identity Monad', function() {
@@ -10,7 +9,7 @@ describe('Monads Test', function() {
         addOne = function(value) {
           return new Identity(value+1)
         }
-        assert.equal(identity.pipe(addOne).value, 2)
+        identity.pipe(addOne).value.should.equal(2)
         })
     })
 })
