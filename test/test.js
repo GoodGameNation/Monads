@@ -1,9 +1,16 @@
-var assert = require("assert")
-describe('test', function(){
-  describe('#indexOf()', function(){
-      it('should return -1 when the value is not present', function(){
-            assert.equal(-1, [1,2,3].indexOf(5));
-            assert.equal(-1, [1,2,3].indexOf(0));
-          })
+var Monads = require('../lib/monads.js')
+  , Identity = Monads.Identity
+  , Array = Monads.Array
+  , assert = require("assert")
+
+describe('Monads Test', function() {
+  describe('Identity Monad', function() {
+      it('Test the Identity Monad on an addOne function', function() {
+        identity = new Identity(1)
+        addOne = function(value) {
+          return new Identity(value+1)
+        }
+        assert.equal(identity.pipe(addOne).value, 2)
+        })
     })
 })
