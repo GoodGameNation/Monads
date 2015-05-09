@@ -59,17 +59,18 @@ Maybe.prototype.inspect = function() {
 
 // Usage: List(1,2,3,4,5,6)
 function List() {
+  if (!(this instanceof List)) return new List(...Array.prototype.slice.call(arguments));
   this.value = Array.prototype.slice.call(arguments)
 }
 
 // list
 List.prototype.pipe = function (transform) {
   var results = [];
-  for (var i = 0; i < this.length; i++) {
-    result = transform(this[i]);
-    results.push(result);
+  for (var i = 0; i < this.value.length; i++) {
+    var result = transform(this.value[i]);
+    results = results.concat(result.value);
   }
-  return results;
+  return List(...results);
 };
 
 List.prototype.fmap = function (transform) {
@@ -80,6 +81,7 @@ module.exports = {
   Identity: Identity,
   Maybe: Maybe,
   Just: Just,
+  List: List,
   Nothing: Nothing,
   Array: Array
 }

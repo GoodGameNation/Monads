@@ -3,6 +3,7 @@ var Monads = require('../lib/monads.js')
   , Maybe = Monads.Maybe
   , Nothing = Monads.Nothing
   , Just = Monads.Just
+  , List = Monads.List
   , should = require("chai").should()
 
 describe('Monads Test', function() {
@@ -20,12 +21,19 @@ describe('Monads Test', function() {
       var addOne = function(value) {
         return Just(value+1)
       }
-
       var toNothing = function(value) {
         return Nothing()
       }
       maybe.pipe(addOne).value.should.equal(2)
       should.not.exist(maybe.pipe(addOne).pipe(toNothing).pipe(addOne).value)
+    })
+
+    it('Test the List Monad on an addOne function', function() {
+      list = List(1)
+      var addOne = function(value) {
+        return List(value+1)
+      }
+      list.pipe(addOne).value.should.eql([2])
     })
   })
 })
