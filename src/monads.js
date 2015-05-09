@@ -30,7 +30,7 @@ Maybe.prototype.pipe = function(transform) {
     return Nothing();
   }
 
-  return checkType(transform(this.value));
+  return checkType(this, transform(this.value));
 };
 
 Maybe.prototype.inspect = function() {
