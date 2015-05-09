@@ -42,6 +42,10 @@ Maybe.prototype.pipe = function(transform) {
 };
 
 Maybe.prototype.fmap = function(transform) {
+  var transformValue
+  if(this.value === null || this.value === undefined) {
+    return Nothing()
+  }
   transformValue = transform(this.value)
   if( transformValue === null || transformValue === undefined) {
     return Nothing()
