@@ -16,7 +16,7 @@ Identity.prototype.pipe = function(transform) {
 };
 
 Identity.prototype.fmap = function(transform) {
-  // TODO
+  return new Identity(transform(this.value))
 };
 
 // Maybe
@@ -28,9 +28,12 @@ function Maybe(value) {
 function Nothing() {
   return new Maybe(null);
 }
+function Just(value) {
+  return new Maybe(value);
+}
 
 Maybe.prototype.pipe = function(transform) {
-  if (this.value == null || this.value == undefined) {
+  if (this.value === null || this.value === undefined) {
     return Nothing();
   }
 
@@ -38,15 +41,24 @@ Maybe.prototype.pipe = function(transform) {
 };
 
 Maybe.prototype.fmap = function(transform) {
-  // TODO
+  transformValue = transform(this.value)
+  if( transformValue === null || transformValue === undefined) {
+    return Nothing()
+  }
+  return Just(transform(this.value))
 };
 
 Maybe.prototype.inspect = function() {
   return this.value;
 }
 
+// Usage: List(1,2,3,4,5,6)
+function List() {
+  this.value = Array.prototype.slice.call(arguments)
+}
+
 // list
-Array.prototype.pipe = function (transform) {
+List.prototype.pipe = function (transform) {
   var results = [];
   for (var i = 0; i < this.length; i++) {
     result = transform(this[i]);
@@ -55,8 +67,8 @@ Array.prototype.pipe = function (transform) {
   return results;
 };
 
-Array.prototype.fmap = function (transform) {
-  // TODO
+List.prototype.fmap = function (transform) {
+
 };
 
 module.exports = {
