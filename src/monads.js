@@ -15,6 +15,10 @@ Identity.prototype.pipe = function(transform) {
   return checkType(this, transform(this.value));
 };
 
+Identity.prototype.fmap = function(transform) {
+  // TODO
+};
+
 // Maybe
 function Maybe(value) {
   if (!(this instanceof Maybe)) return new Maybe(value);
@@ -33,6 +37,10 @@ Maybe.prototype.pipe = function(transform) {
   return checkType(this, transform(this.value));
 };
 
+Maybe.prototype.fmap = function(transform) {
+  // TODO
+};
+
 Maybe.prototype.inspect = function() {
   return this.value;
 }
@@ -45,6 +53,10 @@ Array.prototype.pipe = function (transform) {
     results.push(result);
   }
   return results;
+};
+
+Array.prototype.fmap = function (transform) {
+  // TODO
 };
 
 module.exports = {
