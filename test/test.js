@@ -57,5 +57,14 @@ describe('Functor Test', function() {
       maybe = Nothing()
       should.not.exist(maybe.fmap(addOne).value)
     })
+
+    it('Test the List functor on an addOne function', function() {
+      list = List(1)
+      var addOne = function(value) {
+        return value+1
+      }
+      list.fmap(addOne).value.should.eql([2])
+    })
+
   })
 })

@@ -74,8 +74,8 @@ List.prototype.pipe = function (transform) {
 };
 
 List.prototype.fmap = function (transform) {
-  results = []
-  for(var i=0; i<this.value.length; i++) {
+  var results = []
+  for(var i=0; i < this.value.length; i++) {
     results[i] = transform(this.value[i]);
   }
   return List(...results)
