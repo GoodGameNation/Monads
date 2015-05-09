@@ -8,6 +8,7 @@ function checkType(context, obj) {
 }
 
 function Identity(value) {
+  if (!(this instanceof Identity)) return new Identity(value);
   this.value = value;
 }
 
@@ -73,5 +74,8 @@ List.prototype.fmap = function (transform) {
 
 module.exports = {
   Identity: Identity,
+  Maybe: Maybe,
+  Just: Just,
+  Nothing: Nothing,
   Array: Array
 }

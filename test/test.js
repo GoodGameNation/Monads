@@ -1,13 +1,16 @@
 var Monads = require('../lib/monads.js')
   , Identity = Monads.Identity
+  , Maybe = Monads.Maybe
+  , Nothing = Monads.Nothing
+  , Just = Monads.Just
   , should = require("chai").should()
 
 describe('Monads Test', function() {
   describe('Identity Monad', function() {
       it('Test the Identity Monad on an addOne function', function() {
-        identity = new Identity(1)
+        identity = Identity(1)
         var addOne = function(value) {
-          return new Identity(value+1)
+          return Identity(value+1)
         }
         identity.pipe(addOne).value.should.equal(2)
       })
@@ -30,7 +33,7 @@ describe('Monads Test', function() {
 describe('Functor Test', function() {
   describe('Identity Functor', function() {
       it('Test the Identity Functor on an addOne function', function() {
-        identity = new Identity(1)
+        identity = Identity(1)
         var addOne = function(value) {
           return value+1
         }
